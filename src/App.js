@@ -4,13 +4,15 @@ import * as BooksAPI from './BooksAPI'
 import './App.css'
 import BookShelf from './BookShelf';
 import SearchBooks from './SearchBooks'
+import BookInfo from './BookInfo'
 import debounce from 'lodash.debounce'
 
 class BooksApp extends React.Component {
 
   state = {
     books: [],    // my library
-    results: []   // search results
+    results: [],  // search results
+    book: {}
   }
 
   componentDidMount() {
@@ -48,6 +50,8 @@ class BooksApp extends React.Component {
   handleSearch = debounce(query => this.searchBooks(query), 500);
 
   searchBooks = (query) => {
+    query = query.trim();
+    
     // if query is empty clear the results and return 
     if (query === '') {
       this.resetResults();
@@ -75,7 +79,11 @@ class BooksApp extends React.Component {
   }
   
   resetResults = () => {
-    this.setState({results: []})
+    this.setState({ book: {}, results: []});
+  }
+
+  getBook = (id) => {
+    BooksAPI.get(id).then(book => this.setState({ book }))
   }
 
   render() {
@@ -91,10 +99,7 @@ class BooksApp extends React.Component {
         )}/>
 
         <Route exact path='/' render={() => (
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
+          <Header>
             <div className="list-books-content">
               <div>
                 <BookShelf 
@@ -122,11 +127,41 @@ class BooksApp extends React.Component {
                 Add a book
               </Link>
             </div>
-          </div>
+          </Header>
+        )}/>
+
+        <Route path='/book/:id' render={(props) => (
+          <Header back="true">
+            <BookInfo
+              {...props}
+              onLoad={this.getBook}
+              book={this.state.book}
+              onUpdate={this.updateBook}
+              onReset={this.resetResults}
+            />
+          </Header>
         )}/>
       </div>
     )
   }
+}
+
+function Header(props) {
+  return (
+    <div className="list-books">
+      <div className="list-books-title">
+        <h1>MyReads</h1>
+        {
+          props.back ? 
+            <Link to="/" className="close-book">
+              Close
+            </Link>
+            : null
+        }
+      </div>
+      {props.children}
+    </div>
+  )
 }
 
 export default BooksApp

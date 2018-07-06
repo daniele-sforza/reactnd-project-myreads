@@ -4,8 +4,17 @@ import Book from './Book'
 
 class SearchBooks extends Component {
 
+  state = {
+    searching: false,
+    message: ''
+  }
+
   componentWillUnmount() {
     this.props.onReset();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.results !== this.props.results) this.setState({ searching: false, message: 'Your search returned no results' })
   }
 
   render() {
@@ -24,20 +33,40 @@ class SearchBooks extends Component {
               However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
               you don't find a specific author or title. Every search is limited by search terms.
             */}
-            <input type="text" placeholder="Search by title or author" autoFocus="true" onChange={(e) => this.props.onSearch(e.target.value)} />
-
+            <input type="text" placeholder="Search by title or author" autoFocus="true" 
+              onChange={(e) => {this.setState({ searching: true });
+                                this.props.onSearch(e.target.value)
+                               }
+                       } 
+            />
           </div>
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
+            {/* if search is in progress show loading spinner */}
             {
-              this.props.results.map(book => (
-                <Book 
-                  key={book.id} 
-                  book={book}
-                  onUpdate={this.props.onUpdate}
-                />
-              ))
+              this.state.searching ?  
+                <div className="spinner">
+                  <div className="bounce1"></div>
+                  <div className="bounce2"></div>
+                  <div className="bounce3"></div>
+                </div> : null
+            }
+
+            {/* if we have search results and no search in progress show them */}
+            {
+              !this.state.searching && this.props.results.length === 0 ?
+                <div className="search-empty">
+                  {this.state.message}
+                </div> :
+                this.props.results.map(book => (
+                  <li key={book.id}>
+                    <Book  
+                      book={book}
+                      onUpdate={this.props.onUpdate}
+                    />
+                  </li>
+                ))
             }
           </ol>
         </div>

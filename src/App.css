@@ -7,12 +7,23 @@ body {
 body, .app {
   background: white;
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Special Elite', cursive;
+}
+a {
+  text-decoration: none;
+}
 
 /* main page */
 
 .list-books-title {
   padding: 10px 0;
-  background: #2e7c31;
+  background: linear-gradient(to right, #000000, #434343);
   text-align: center;
 }
 .list-books-title h1 {
@@ -53,7 +64,7 @@ body, .app {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: #2e7d32;
+  background: black;
   background-image: url('./icons/add.svg');
   background-repeat: no-repeat;
   background-position: center;
@@ -103,6 +114,14 @@ body, .app {
   padding: 80px 10px 20px;
 }
 
+.search-empty {
+  top: 50%;
+  position: absolute;
+  color: lightgray;
+  font-size: xx-large;
+  margin: auto;
+}
+
 /* books grid */
 
 .books-grid {
@@ -147,7 +166,7 @@ body, .app {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #60ac5d;
+  background: #cc3333;
   background-image: url('./icons/arrow-drop-down.svg');
   background-repeat: no-repeat;
   background-position: center;
@@ -171,4 +190,83 @@ body, .app {
   padding: 20px 10px 0;
   text-align: center;
   font-size: 0.8em;
+}
+
+/* book info */
+
+.close-book {
+  display: block;
+  position: absolute;
+  top: 5px;
+  left: 15px;
+  width: 50px;
+  height: 53px;
+  background: black;
+  background-image: url('./icons/arrow-back.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 28px;
+  font-size: 0;
+}
+
+.book-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 250px;
+  justify-content: center;
+  margin: auto;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.book-content {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  width: 30%;
+  min-width: 300px;
+}
+
+.book-content p {
+  font-size: small;
+}
+
+/* loading spinner*/
+
+.spinner {
+  position: absolute;
+  margin: auto;
+  top: 50%;
+  left: 50%;
+  width: 70px;
+  text-align: center;
+}
+
+.spinner > div {
+  width: 18px;
+  height: 18px;
+  background-color: #333;
+
+  border-radius: 100%;
+  display: inline-block;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.spinner .bounce1 {
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  animation-delay: -0.16s;
+}
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% { 
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 40% { 
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
 }
