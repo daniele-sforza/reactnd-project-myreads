@@ -37,7 +37,7 @@ class BookInfo extends Component {
         <div className="book-content">
           <p>Pages: {book.pageCount}</p>
           <p>{book.description}</p>
-          <p><a href={book.previewLink} target="_blank"><img src={gBooksLogo} alt="Google Books Preview" /></a></p>
+          <p><a href={book.previewLink} target="_blank" rel="noopener noreferrer"><img src={gBooksLogo} alt="Google Books Preview" /></a></p>
         </div>
       </div>
     )

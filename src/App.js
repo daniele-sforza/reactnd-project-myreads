@@ -5,7 +5,7 @@ import './App.css'
 import BookShelf from './BookShelf';
 import SearchBooks from './SearchBooks'
 import BookInfo from './BookInfo'
-import debounce from 'lodash.debounce'
+import _ from 'lodash'
 
 class BooksApp extends React.Component {
 
@@ -47,7 +47,7 @@ class BooksApp extends React.Component {
   }
 
   // debounce the search function to avoid fetch requests on every keystroke
-  handleSearch = debounce(query => this.searchBooks(query), 500);
+  handleSearch = _.debounce(query => this.searchBooks(query), 500);
 
   searchBooks = (query) => {
     query = query.trim();

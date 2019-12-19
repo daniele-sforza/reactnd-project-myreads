@@ -1,14 +1,14 @@
 {
   "homepage": "https://daniele-sforza.github.io/reactnd-project-myreads/",
   "dependencies": {
-    "prop-types": "^15.6.1",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
-    "react-router-dom": "^4.3.1"
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
-    "gh-pages": "^1.2.0",
-    "react-scripts": "1.1.4"
+    "gh-pages": "^2.1.1",
+    "react-scripts": "3.3.0"
   },
   "scripts": {
     "predeploy": "npm run build",
@@ -17,5 +17,17 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
